@@ -1,4 +1,7 @@
+import 'package:dump/locator.dart';
+import 'package:dump/services/authServices.dart';
 import 'package:dump/widget/NavigationBar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,6 +11,7 @@ class UserLogin extends StatefulWidget {
 }
 
 class _UserLoginState extends State<UserLogin> {
+  final AuthService _authService = locator<AuthService>();
   bool isOTP = false; // flag to make the otp field visible
   bool enabled = false; // flag to disable the mobile number input widget
   @override
@@ -29,9 +33,7 @@ class _UserLoginState extends State<UserLogin> {
               child: Container(
                   margin: const EdgeInsets.only(right: 20, left: 20),
                   child: TextField(
-                    readOnly: enabled,
-                    keyboardType:
-                        TextInputType.numberWithOptions(decimal: false),
+                    keyboardType: TextInputType.number,
                     decoration: new InputDecoration(
                         prefixIcon: Icon(Icons.mobile_friendly_rounded),
                         border: new OutlineInputBorder(
@@ -76,7 +78,7 @@ class _UserLoginState extends State<UserLogin> {
                     keyboardType:
                         TextInputType.numberWithOptions(decimal: false),
                     decoration: new InputDecoration(
-                        prefixIcon: Icon(Icons.password_sharp),
+                        prefixIcon: Icon(Icons.visibility_off),
                         border: new OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
                             const Radius.circular(45.0),
@@ -98,7 +100,10 @@ class _UserLoginState extends State<UserLogin> {
                   alignment: Alignment.center,
                   child: RaisedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationBar()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => NavigationBar()));
                     },
                     child: Text("Submit OTP"),
                     shape: RoundedRectangleBorder(
@@ -122,10 +127,31 @@ class _UserLoginState extends State<UserLogin> {
                         style: TextStyle(
                           decoration: TextDecoration.underline,
                         ),
-                        mouseCursor: SystemMouseCursors.click,
+                        // mouseCursor: SystemMouseCursors.click,
                       )
                     ]))))
           ],
         ));
+  }
+
+  //phoneVerification method
+  String _verificationId = "", _verificationCode = "";
+  _phoneVerification(String number) async {
+    await _authService.authservice.verifyPhoneNumber(
+        timeout: Duration(seconds: 60),
+        phoneNumber: number,
+        verificationCompleted: (value) {
+          print("Printing verification completed : $value");
+        },
+        verificationFailed: (result) {
+          print("Printing verification Failed : $result");
+        },
+        codeSent: (String verificationId, resendToken) {
+          _verificationId = verificationId;
+          setState(() {});
+        },
+        codeAutoRetrievalTimeout: (verificationId) {
+          _verificationCode = verificationId;
+        });
   }
 }
