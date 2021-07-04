@@ -1,6 +1,5 @@
-import 'package:dump/screens/DriverMainPage/driverMainPageModel.dart';
+import 'package:dump/screens/DriverMainPage/driverMainViewModel.dart';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'package:stacked/stacked.dart';
 
 class DriverHomeView extends StatefulWidget {

@@ -1,6 +1,5 @@
 import 'package:dump/locator.dart';
 import 'package:dump/services/authServices.dart';
-import 'package:dump/widget/NavigationBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

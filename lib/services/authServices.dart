@@ -33,7 +33,7 @@ class AuthService {
     ];
   }
 
-  //signup method not used in this app!.
+  //TODO: signup method not used in this app!.
   void signUp() {}
 
   //method to check user is already logged in or not

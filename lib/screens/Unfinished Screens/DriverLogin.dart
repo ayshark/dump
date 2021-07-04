@@ -1,12 +1,12 @@
 import 'package:dump/router/pathnames.dart';
-import 'package:dump/screens/driverMainPage.dart';
+import 'package:dump/screens/DriverMainPage/driverMainView.dart';
 import 'package:dump/services/authServices.dart';
 import 'package:dump/services/navigationService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../locator.dart';
+import 'package:dump/locator.dart';
 
 class DriverLogin extends StatefulWidget {
   @override

@@ -1,7 +1,9 @@
-import 'package:dump/screens/StartupView.dart';
+import 'package:dump/screens/Unfinished%20Screens/ComplaintPortal.dart';
+import 'package:dump/screens/Unfinished%20Screens/ResidentLocation.dart';
+import 'package:dump/screens/Unfinished%20Screens/Settings.dart';
+import 'package:dump/screens/UserMainPage/UserMainView.dart';
 import 'package:dump/services/navigationService.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'router/route.dart' as routes;
 import 'router/pathnames.dart' as routeName;
@@ -25,7 +27,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: Color.fromRGBO(48, 72, 75, 1)),
       onGenerateRoute: routes.generateRoute,
       navigatorKey: locator<NavigationService>().navigatorKey,
-      initialRoute: routeName.StartUpRoute,
+      // initialRoute: routeName.UserHomeViewRoute,
+      home: UserMainView(),
     );
   }
 }
